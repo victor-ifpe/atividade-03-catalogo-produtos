@@ -1,58 +1,27 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    ScrollView,
-} from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 import { useState } from 'react';
 
 export default function TelaFiltros({ navigation, route }) {
-
-    const {
-        categorias,
-        categoriaAtual,
-        ordenacaoAtual,
-        aplicarFiltros,
-    } = route.params;
-
-    const [categoria, setCategoria] = useState(
-        categoriaAtual || 'Todos'
-    );
-
-    const [ordenacao, setOrdenacao] = useState(
-        ordenacaoAtual || 'recentes'
-    );
-
+    const { categorias, categoriaAtual, ordenacaoAtual, aplicarFiltros, } = route.params;
+    const [categoria, setCategoria] = useState(categoriaAtual || 'Todos');
+    const [ordenacao, setOrdenacao] = useState(ordenacaoAtual || 'recentes');
 
     const aplicar = () => {
-
-        aplicarFiltros(
-            categoria,
-            ordenacao
-        );
-
+        aplicarFiltros(categoria, ordenacao);
         navigation.goBack();
     };
 
-
     const limpar = () => {
-
         setCategoria('Todos');
         setOrdenacao('recentes');
     };
 
-
     return (
         <View style={styles.container}>
 
-            {/* CABEÇALHO */}
-
+            {/* Cabeçalho */}
             <View style={styles.cabecalho}>
-
                 <Text style={styles.titulo}>
                     FILTRAR
                 </Text>
@@ -66,154 +35,90 @@ export default function TelaFiltros({ navigation, route }) {
                         color="#000"
                     />
                 </TouchableOpacity>
-
             </View>
 
-
             <ScrollView>
-
-                {/* CATEGORIAS */}
-
+                {/* Categorias */}
                 <Text style={styles.tituloSecao}>
                     Categorias
                 </Text>
 
                 <View style={styles.categorias}>
-
                     {categorias.map((item) => (
 
                         <TouchableOpacity
                             key={item}
-                            style={[
-                                styles.categoria,
-                                categoria === item &&
-                                styles.categoriaSelecionada,
-                            ]}
+                            style={[styles.categoria, categoria === item && styles.categoriaSelecionada,]}
                             onPress={() => setCategoria(item)}
                         >
-
-                            <Text
-                                style={[
-                                    styles.textoCategoria,
-                                    categoria === item &&
-                                    styles.textoSelecionado,
-                                ]}
-                            >
+                            <Text style={[styles.textoCategoria, categoria === item && styles.textoSelecionado,]}        >
                                 {item}
                             </Text>
-
                         </TouchableOpacity>
-
                     ))}
-
                 </View>
 
-
-                {/* ORDENAÇÃO */}
-
+                {/* Ordenação */}
                 <Text style={styles.tituloSecao}>
                     Ordenação
                 </Text>
 
-
                 <TouchableOpacity
                     style={styles.opcao}
-                    onPress={() =>
-                        setOrdenacao('recentes')
-                    }
+                    onPress={() => setOrdenacao('recentes')}
                 >
-
                     <Ionicons
-                        name={
-                            ordenacao === 'recentes'
-                                ? 'radio-button-on'
-                                : 'radio-button-off'
-                        }
+                        name={ordenacao === 'recentes' ? 'radio-button-on' : 'radio-button-off'}
                         size={22}
                     />
-
                     <Text style={styles.textoOpcao}>
                         Mais recentes
                     </Text>
-
                 </TouchableOpacity>
-
 
                 <TouchableOpacity
                     style={styles.opcao}
-                    onPress={() =>
-                        setOrdenacao('menorPreco')
-                    }
+                    onPress={() => setOrdenacao('menorPreco')}
                 >
-
                     <Ionicons
-                        name={
-                            ordenacao === 'menorPreco'
-                                ? 'radio-button-on'
-                                : 'radio-button-off'
-                        }
+                        name={ordenacao === 'menorPreco' ? 'radio-button-on' : 'radio-button-off'}
                         size={22}
                     />
-
                     <Text style={styles.textoOpcao}>
                         Menor preço
                     </Text>
-
                 </TouchableOpacity>
-
 
                 <TouchableOpacity
                     style={styles.opcao}
-                    onPress={() =>
-                        setOrdenacao('maiorPreco')
-                    }
+                    onPress={() => setOrdenacao('maiorPreco')}
                 >
-
                     <Ionicons
-                        name={
-                            ordenacao === 'maiorPreco'
-                                ? 'radio-button-on'
-                                : 'radio-button-off'
-                        }
+                        name={ordenacao === 'maiorPreco' ? 'radio-button-on' : 'radio-button-off'}
                         size={22}
                     />
-
                     <Text style={styles.textoOpcao}>
                         Maior preço
                     </Text>
-
                 </TouchableOpacity>
 
 
                 <TouchableOpacity
                     style={styles.opcao}
-                    onPress={() =>
-                        setOrdenacao('avaliacao')
-                    }
+                    onPress={() => setOrdenacao('avaliacao')}
                 >
-
                     <Ionicons
-                        name={
-                            ordenacao === 'avaliacao'
-                                ? 'radio-button-on'
-                                : 'radio-button-off'
-                        }
+                        name={ordenacao === 'avaliacao' ? 'radio-button-on' : 'radio-button-off'}
                         size={22}
                     />
-
                     <Text style={styles.textoOpcao}>
                         Mais populares
                     </Text>
-
                 </TouchableOpacity>
-
             </ScrollView>
 
-
-            {/* BOTÕES */}
-
+            {/* Botoes */}
             <View style={styles.botoes}>
-
                 <TouchableOpacity
                     style={styles.botaoLimpar}
                     onPress={limpar}
@@ -225,20 +130,16 @@ export default function TelaFiltros({ navigation, route }) {
 
                 </TouchableOpacity>
 
-
                 <TouchableOpacity
                     style={styles.botaoAplicar}
                     onPress={aplicar}
                 >
-
                     <Text style={styles.textoAplicar}>
                         Aplicar filtros
                     </Text>
-
                 </TouchableOpacity>
 
             </View>
-
         </View>
     );
 }
@@ -347,5 +248,4 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
     },
-
 });

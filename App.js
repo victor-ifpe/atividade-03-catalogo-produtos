@@ -1,26 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import TelaExplorarProdutos from './src/telas/TelaExplorarProdutos';
-
 import TelaDetalhesProduto from './src/telas/TelaDetalhesProdutos';
-
 import TelaFiltros from './src/telas/TelaFiltros';
 
-
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
 
   return (
-
     <NavigationContainer>
-
-      <Stack.Navigator
-        initialRouteName="TelaExplorarProdutos"
-      >
+      <Stack.Navigator initialRouteName="TelaExplorarProdutos">
 
         <Stack.Screen
           name="TelaExplorarProdutos"
@@ -30,7 +20,6 @@ export default function App() {
           }}
         />
 
-
         <Stack.Screen
           name="TelaDetalhesProduto"
           component={TelaDetalhesProduto}
@@ -38,7 +27,6 @@ export default function App() {
             headerShown: false,
           }}
         />
-
 
         <Stack.Screen
           name="TelaFiltros"
@@ -49,8 +37,6 @@ export default function App() {
         />
 
       </Stack.Navigator>
-
     </NavigationContainer>
-
   );
 }
