@@ -1,12 +1,17 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
 
 export default function TelaDetalhesProdutos({
   navigation,
   route,
 }) {
 
-  const { produto } = route.params;
+  const { produto, favoritos, alternarFavorito } = route.params;
+
+  const [favorito, setFavorito] = useState(
+    favoritos.includes(produto.id)
+  );
 
   return (
     <View style={styles.container}>
@@ -27,11 +32,16 @@ export default function TelaDetalhesProdutos({
           DETALHES
         </Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            alternarFavorito(produto.id);
+            setFavorito(!favorito);
+          }}
+        >
           <Ionicons
-            name="heart-outline"
+            name={favorito ? 'heart' : 'heart-outline'}
             size={27}
-            color="#000"
+            color={favorito ? '#e53935' : '#000'}
           />
         </TouchableOpacity>
       </View>

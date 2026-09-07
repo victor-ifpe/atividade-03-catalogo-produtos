@@ -115,9 +115,7 @@ export default function TelaExplorarProdutos({ navigation }) {
   };
 
   const alternarFavorito = (id) => {
-    const novosFavoritos = favoritos.includes(id)
-      ? favoritos.filter((item) => item !== id)
-      : [...favoritos, id];
+    const novosFavoritos = favoritos.includes(id) ? favoritos.filter((item) => item !== id) : [...favoritos, id];
 
     setFavoritos(novosFavoritos);
 
@@ -165,7 +163,11 @@ export default function TelaExplorarProdutos({ navigation }) {
   };
 
   const abrirDetalhes = (produto) => {
-    navigation.navigate('TelaDetalhesProduto', { produto });
+    navigation.navigate('TelaDetalhesProduto', {
+      produto,
+      favoritos,
+      alternarFavorito,
+    });
   };
 
   const renderProduto = ({ item }) => {
@@ -367,9 +369,7 @@ export default function TelaExplorarProdutos({ navigation }) {
       <View style={styles.linhaProdutos}>
         <View>
           <Text style={styles.tituloProdutos}>
-            {mostrarFavoritos
-              ? 'Meus favoritos'
-              : 'Produtos em destaque'}
+            {mostrarFavoritos ? 'Meus favoritos' : 'Produtos em destaque'}
           </Text>
 
           <Text style={styles.quantidade}>
@@ -460,6 +460,7 @@ const styles = StyleSheet.create({
   tituloContainer: {
     flex: 1,
     marginLeft: 15,
+    alignItems: 'center',
   },
 
   titulo: {
